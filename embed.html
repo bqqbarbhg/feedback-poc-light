@@ -1,0 +1,23 @@
+
+<body>
+
+<script>
+
+window.addEventListener('message', (e) => {
+	const data = e.data
+	if (data.action == 'set') {
+		window.localStorage.setItem(data.key, data.value)
+		console.log(window.localStorage.getItem(data.key))
+	} else if (data.action == 'get') {
+		const value = window.localStorage.getItem(data.key)
+		console.log(value)
+		e.source.postMessage({
+			type: 'receiveValue', value
+		}, '*')
+	}
+})
+
+</script>
+
+</body>
+
